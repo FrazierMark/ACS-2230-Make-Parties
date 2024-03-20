@@ -6,8 +6,10 @@ const app = express();
 
 // Allow Express (our web framework) to render HTML templates and send them back to the client using a new function
 const handlebars = require('express-handlebars');
-const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Handlebars = require('handlebars');
+const {
+	allowInsecurePrototypeAccess,
+} = require('@handlebars/allow-prototype-access');
 
 const hbs = handlebars.create({
 	// Specify helpers which are only registered on this instance.
@@ -20,7 +22,7 @@ const hbs = handlebars.create({
 		},
 	},
 	defaultLayout: 'main',
-	handlebars: allowInsecurePrototypeAccess(Handlebars)
+	handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
 
 app.engine('handlebars', hbs.engine);
@@ -74,7 +76,8 @@ app.get('/events/new', (req, res) => {
 app.post('/events', (req, res) => {
 	models.Event.create(req.body)
 		.then((event) => {
-			res.redirect(`/`);
+			// Redirect to events/:id
+			res.redirect(`/events/${event.id}`);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -83,15 +86,17 @@ app.post('/events', (req, res) => {
 
 // Show Event Route
 app.get('/events/:id', (req, res) => {
-  // Search for the event by its id that was passed in via req.params
-  models.Event.findByPk(req.params.id).then((event) => {
-    // If the id is for a valid event, show it
-    res.render('events-show', { event: event })
-  }).catch((err) => {
-    // if they id was for an event not in our db, log an error
-    console.log(err.message);
-  })
-})
+	// Search for the event by its id that was passed in via req.params
+	models.Event.findByPk(req.params.id)
+		.then((event) => {
+			// If the id is for a valid event, show it
+			res.render('events-show', { event: event });
+		})
+		.catch((err) => {
+			// if they id was for an event not in our db, log an error
+			console.log(err.message);
+		});
+});
 
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
