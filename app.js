@@ -3,8 +3,11 @@ const express = require('express');
 const app = express();
 
 // Middleware
+
 // Allow Express (our web framework) to render HTML templates and send them back to the client using a new function
 const handlebars = require('express-handlebars');
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 const hbs = handlebars.create({
 	// Specify helpers which are only registered on this instance.
@@ -16,6 +19,8 @@ const hbs = handlebars.create({
 			return 'BAR!';
 		},
 	},
+	defaultLayout: 'main',
+	handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
 
 app.engine('handlebars', hbs.engine);
@@ -75,6 +80,18 @@ app.post('/events', (req, res) => {
 			console.log(err);
 		});
 });
+
+// Show Event Route
+app.get('/events/:id', (req, res) => {
+  // Search for the event by its id that was passed in via req.params
+  models.Event.findByPk(req.params.id).then((event) => {
+    // If the id is for a valid event, show it
+    res.render('events-show', { event: event })
+  }).catch((err) => {
+    // if they id was for an event not in our db, log an error
+    console.log(err.message);
+  })
+})
 
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
