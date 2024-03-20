@@ -10,8 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "body-parser": "^1.20.2",
     "express": "^4.19.0",
     "express-handlebars": "^7.1.2",
-    "nodemon": "^3.1.0"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.1",
+    "sequelize-cli": "^6.6.2"
   }
 }
