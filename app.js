@@ -4,7 +4,7 @@ const app = express();
 
 // Middleware
 
-// Allow Express (our web framework) to render HTML templates and send them back to the client using a new function
+// Allow Express to render HTML templates and send them back to the client using a new function
 const handlebars = require('express-handlebars');
 const Handlebars = require('handlebars');
 const {
@@ -12,15 +12,6 @@ const {
 } = require('@handlebars/allow-prototype-access');
 
 const hbs = handlebars.create({
-	// Specify helpers which are only registered on this instance.
-	helpers: {
-		foo() {
-			return 'FOO!';
-		},
-		bar() {
-			return 'BAR!';
-		},
-	},
 	defaultLayout: 'main',
 	handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
@@ -29,7 +20,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
-// BODY-PARSER
+// Body-Parser
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
