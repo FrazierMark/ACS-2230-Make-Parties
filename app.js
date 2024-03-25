@@ -34,6 +34,7 @@ const models = require('./db/models');
 // Routes
 require('./controllers/events')(app, models);
 require('./controllers/rsvps')(app, models);
+require('./controllers/auth')(app, models);
 
 // Mock Data
 let events = [

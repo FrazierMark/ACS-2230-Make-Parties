@@ -1,0 +1,42 @@
+<form action='/sign-up' method='post'>
+	<div class='form-group'>
+		<label for='firstName'>First Name</label>
+		<input
+			name='firstName'
+			class='form-control'
+			placeholder='First Name'
+			value='{{user.firstName}}'
+		/>
+	</div>
+	<div class='form-group'>
+		<label for='lastName'>Last Name</label>
+		<input
+			name='lastName'
+			class='form-control'
+			placeholder='Last Name'
+			value='{{user.lastName}}'
+		/>
+	</div>
+	<div class='form-group'>
+		<label for='email'>Email</label>
+		<input
+			name='email'
+			class='form-control'
+			placeholder='Email'
+			value='{{user.email}}'
+		/>
+	</div>
+	<div class='form-group'>
+		<label for='password'>Password</label>
+		<input
+			name='password'
+			class='form-control'
+			placeholder='Password'
+			type='password'
+		/>
+	</div>
+		<div class='text-right'>
+			<button type='submit' class='btn btn-primary' name='button'>Sign Up</button>
+		</div>
+	</div>
+</form>
