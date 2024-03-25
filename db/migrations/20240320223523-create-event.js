@@ -15,6 +15,14 @@ module.exports = {
       desc: {
         type: Sequelize.TEXT
       },
+      UserId: { // Define foreign key explicitly
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onDelete: 'CASCADE' // optional, add if needed
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

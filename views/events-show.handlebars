@@ -4,9 +4,11 @@
 			  <small class="text-muted">Created on: {{event.createdAtFormatted}}</small>
         <h3>{{event.title}}</h3>
         <div class="lead">{{event.desc}}</div>
+        {{#if currentUser}}
         <div class="text-right">
             <a href="/events/{{event.id}}/edit">Edit</a>
         </div>
+        {{/if}}
     </div>
 	</div>
 	<div class='col-lg-4 offset-lg-1'>
